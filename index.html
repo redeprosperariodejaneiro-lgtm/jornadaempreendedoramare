@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inscrição - Jornada Empreendedora na Maré</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --azul-principal:  #092040;
+    --azul-secundario: #00B7D7;
+    --amarelo:         #ECC203;
+    --cinza:           #EFF1F3;
+    --azul-escuro:     #021738;
+    --branco:          #FFFFFF;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Open Sans', sans-serif; background: var(--cinza); min-height: 100vh; }
+
+  /* FAIXA BRANCA DOS LOGOS */
+  .header-logos {
+    background: var(--branco);
+    border-bottom: 3px solid var(--cinza);
+  }
+  .header-logos-inner {
+    max-width: 780px; margin: 0 auto;
+    padding: 16px 28px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 20px; flex-wrap: wrap;
+  }
+  .logos-area {
+    display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+  }
+  .logo-wrap { display: flex; align-items: center; height: 52px; }
+  .logo-wrap img { height: 52px; width: auto; object-fit: contain; display: block; }
+  .logo-divider {
+    width: 1px; height: 44px;
+    background: #D0D7E0; flex-shrink: 0;
+  }
+  .logo-prospera-destaque img {
+    height: 64px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  /* FAIXA AZUL ESCURO TITULO */
+  .faixa-titulo {
+    background: var(--azul-escuro);
+    border-top: 4px solid var(--amarelo);
+    padding: 36px 28px 24px; text-align: center;
+  }
+  .faixa-titulo h1 {
+    font-family: 'Montserrat', sans-serif; font-weight: 800;
+    font-size: clamp(20px, 5vw, 30px); color: var(--amarelo);
+    letter-spacing: 0.5px; margin-bottom: 8px;
+  }
+  .faixa-titulo p { color: rgba(255,255,255,0.85); font-size: 15px; }
+
+  .faixa-sub {
+    background: var(--azul-secundario);
+    display: flex; align-items: center; justify-content: center;
+    flex-wrap: wrap; gap: 6px 14px; padding: 10px 28px;
+  }
+  .faixa-sub span {
+    color: #fff; font-size: 13px; font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+  }
+  .faixa-sub .sep { color: rgba(255,255,255,0.4); }
+
+  /* CONTAINER */
+  .container { max-width: 780px; margin: 32px auto 48px; padding: 0 16px; }
+
+  /* CARD INFO */
+  .card-info {
+    background: var(--branco); border-left: 5px solid var(--azul-secundario);
+    padding: 22px 26px; margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(9,32,64,0.08);
+  }
+  .card-info h3 {
+    font-family: 'Montserrat', sans-serif; font-weight: 700;
+    color: var(--azul-principal); font-size: 13px;
+    text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 10px;
+  }
+  .card-info p { color: #444; font-size: 14px; line-height: 1.7; }
+  .card-info strong { color: var(--azul-escuro); }
+
+  .temas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+  .tema-item { background: var(--cinza); border-left: 3px solid var(--azul-secundario); padding: 9px 12px; }
+  .tema-item .num {
+    font-family: 'Montserrat', sans-serif; font-weight: 800;
+    color: var(--azul-secundario); font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .tema-item .nome { color: var(--azul-escuro); font-size: 12px; font-weight: 600; margin-top: 3px; line-height: 1.4; }
+  .tema-item .data { color: #888; font-size: 11px; margin-top: 3px; }
+
+  /* ENDERECO */
+  .card-endereco {
+    background: var(--azul-principal); padding: 18px 26px;
+    margin-bottom: 20px; display: flex; align-items: flex-start; gap: 18px;
+    box-shadow: 0 2px 8px rgba(9,32,64,0.15);
+  }
+  .endereco-marcador {
+    width: 36px; height: 36px; flex-shrink: 0;
+    background: var(--amarelo);
+    display: flex; align-items: center; justify-content: center; margin-top: 2px;
+  }
+  .card-endereco h3 {
+    font-family: 'Montserrat', sans-serif; font-weight: 700; color: var(--amarelo);
+    font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;
+  }
+  .card-endereco p { color: var(--branco); font-size: 15px; font-weight: 600; line-height: 1.5; }
+  .card-endereco .obs { color: rgba(255,255,255,0.6); font-size: 12px; margin-top: 4px; font-weight: 400; }
+
+  /* FORMULARIO */
+  .form-card { background: var(--branco); padding: 32px; box-shadow: 0 2px 12px rgba(9,32,64,0.10); }
+  .form-section-title {
+    font-family: 'Montserrat', sans-serif; font-weight: 700; color: var(--azul-principal);
+    font-size: 12px; text-transform: uppercase; letter-spacing: 1px;
+    border-bottom: 2px solid var(--azul-secundario); padding-bottom: 8px;
+    margin-bottom: 20px; margin-top: 28px;
+  }
+  .form-section-title:first-child { margin-top: 0; }
+  .field-group { margin-bottom: 18px; }
+  label {
+    display: block; font-family: 'Montserrat', sans-serif; font-weight: 600;
+    color: var(--azul-escuro); font-size: 13px; margin-bottom: 6px;
+  }
+  label .obrig { color: #C0392B; margin-left: 3px; }
+  input[type="text"], input[type="email"], input[type="tel"], select {
+    width: 100%; padding: 11px 14px; border: 1.5px solid #CDD4DE;
+    font-family: 'Open Sans', sans-serif; font-size: 14px; color: #1A1A1A;
+    background: var(--branco); outline: none; transition: border-color 0.2s;
+    -webkit-appearance: none; appearance: none; border-radius: 0;
+  }
+  input:focus, select:focus {
+    border-color: var(--azul-secundario);
+    box-shadow: 0 0 0 3px rgba(0,183,215,0.12);
+  }
+  .input-hint { font-size: 12px; color: #888; margin-top: 5px; }
+
+  .cpf-status { font-size: 12px; margin-top: 5px; font-weight: 600; min-height: 18px; }
+  .cpf-ok    { color: #1A7F3C; }
+  .cpf-erro  { color: #C0392B; }
+  .cpf-duplo { color: #B35A00; }
+
+  /* HORARIOS */
+  .horarios-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 6px; }
+  .horario-option { position: relative; }
+  .horario-option input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
+  .horario-label {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 11px 14px; border: 1.5px solid #CDD4DE;
+    cursor: pointer; transition: all 0.18s; background: var(--branco);
+    margin-bottom: 0; font-size: 13px; font-weight: 600; color: var(--azul-escuro);
+  }
+  .horario-label:hover { border-color: var(--azul-secundario); background: #F4FBFD; }
+  .horario-option input[type="radio"]:checked + .horario-label {
+    border-color: var(--azul-secundario); background: #E8F8FC; color: var(--azul-principal);
+  }
+  .horario-label-left { display: flex; align-items: center; gap: 10px; }
+  .horario-dot {
+    width: 14px; height: 14px; border-radius: 50%; border: 2px solid #B0BCC8;
+    flex-shrink: 0; transition: all 0.18s; position: relative;
+  }
+  .horario-option input[type="radio"]:checked + .horario-label .horario-dot {
+    border-color: var(--azul-secundario); background: var(--azul-secundario);
+  }
+  .horario-dot::after {
+    content: ''; width: 5px; height: 5px; border-radius: 50%;
+    background: #fff; position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%); opacity: 0; transition: opacity 0.18s;
+  }
+  .horario-option input[type="radio"]:checked + .horario-label .horario-dot::after { opacity: 1; }
+
+  .vagas-badge {
+    font-family: 'Montserrat', sans-serif; font-weight: 700;
+    font-size: 11px; padding: 2px 8px; letter-spacing: 0.3px;
+  }
+  .vagas-ok     { background: #E8F5EE; color: #1A7F3C; }
+  .vagas-poucos { background: #FFF3CD; color: #856404; }
+  .vagas-cheio  { background: #FCE8E8; color: #C0392B; }
+
+  .horario-option.lotado .horario-label {
+    background: #F7F7F7; border-color: #E0E0E0; color: #AAA; cursor: not-allowed;
+  }
+  .horario-option.lotado input[type="radio"] { pointer-events: none; }
+  .horario-option.lotado .horario-label:hover { border-color: #E0E0E0; background: #F7F7F7; }
+
+  .aviso-compromisso {
+    background: #FFF8E1; border-left: 4px solid var(--amarelo);
+    padding: 14px 18px; margin-bottom: 20px;
+    font-size: 13px; color: #5C4200; line-height: 1.65;
+  }
+
+  .checkbox-field { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 24px; }
+  .checkbox-field input[type="checkbox"] {
+    width: 18px; height: 18px; flex-shrink: 0; margin-top: 2px;
+    accent-color: var(--azul-principal); cursor: pointer;
+  }
+  .checkbox-field label {
+    font-size: 13px; font-family: 'Open Sans', sans-serif;
+    font-weight: 400; color: #444; cursor: pointer; margin-bottom: 0;
+  }
+
+  .btn-submit {
+    width: 100%; background: var(--azul-principal); color: var(--branco);
+    font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 15px;
+    letter-spacing: 0.8px; padding: 16px; border: none; cursor: pointer;
+    text-transform: uppercase; transition: background 0.2s; border-radius: 0;
+  }
+  .btn-submit:hover:not(:disabled) { background: var(--azul-escuro); }
+  .btn-submit:disabled { background: #A0A8B0; cursor: not-allowed; }
+
+  /* SUCESSO */
+  .sucesso-card {
+    display: none; background: var(--branco); padding: 40px 32px;
+    text-align: center; box-shadow: 0 2px 12px rgba(9,32,64,0.10);
+  }
+  .sucesso-icone {
+    width: 64px; height: 64px; background: var(--azul-secundario); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 20px;
+  }
+  .sucesso-card h2 {
+    font-family: 'Montserrat', sans-serif; font-weight: 800;
+    color: var(--azul-principal); font-size: 22px; margin-bottom: 12px;
+  }
+  .sucesso-card p { color: #555; font-size: 15px; line-height: 1.65; margin: 0 auto 8px; max-width: 480px; }
+  .sucesso-horario {
+    display: inline-block; background: var(--azul-principal); color: var(--amarelo);
+    font-family: 'Montserrat', sans-serif; font-weight: 700;
+    padding: 8px 20px; font-size: 16px; margin-top: 16px;
+  }
+
+  /* FOOTER */
+  .rodape { background: var(--azul-escuro); text-align: center; padding: 18px; }
+  .rodape p { color: rgba(255,255,255,0.5); font-size: 12px; margin-top: 4px; }
+
+  /* LOADING */
+  .loading-overlay {
+    display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(9,32,64,0.65); z-index: 999;
+    align-items: center; justify-content: center;
+  }
+  .loading-overlay.ativo { display: flex; }
+  .loading-box { background: var(--branco); padding: 32px 40px; text-align: center; }
+  .spinner {
+    width: 40px; height: 40px; border: 4px solid var(--cinza);
+    border-top-color: var(--azul-secundario); border-radius: 50%;
+    animation: girar 0.8s linear infinite; margin: 0 auto 14px;
+  }
+  @keyframes girar { to { transform: rotate(360deg); } }
+  .loading-box p {
+    font-family: 'Montserrat', sans-serif; font-weight: 600;
+    color: var(--azul-principal); font-size: 14px;
+  }
+
+  .alerta-vagas {
+    background: #FFF3CD; border-left: 4px solid var(--amarelo);
+    padding: 10px 16px; margin-bottom: 14px; font-size: 13px; color: #5C4200;
+  }
+
+  @media (max-width: 540px) {
+    .horarios-grid { grid-template-columns: 1fr; }
+    .temas-grid    { grid-template-columns: 1fr; }
+    .form-card     { padding: 22px 16px; }
+    .header-logos-inner { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- LOADING -->
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="loading-box">
+    <div class="spinner"></div>
+    <p>Registrando sua inscrição...</p>
+  </div>
+</div>
+
+<!-- FAIXA BRANCA DOS LOGOS -->
+<div class="header-logos">
+  <div class="header-logos-inner">
+
+      <div class="logo-wrap">
+        <img src="https://raw.githubusercontent.com/redeprosperariodejaneiro-lgtm/jornadaempreendedoramare/main/assets/Instituto%20BR.png"
+             alt="Instituto BR Arte">
+      </div>
+      <div class="logo-divider"></div>
+      <div class="logo-wrap">
+        <img src="https://raw.githubusercontent.com/redeprosperariodejaneiro-lgtm/jornadaempreendedoramare/main/assets/SEBRAE.png"
+             alt="SEBRAE-RJ">
+      </div>
+      <div class="logo-divider"></div>
+      <div class="logo-wrap">
+        <img src="https://raw.githubusercontent.com/redeprosperariodejaneiro-lgtm/jornadaempreendedoramare/main/assets/Logo_Rede_Prospera%5B1%5D.JPG"
+             alt="Prospera Rio">
+      </div>
+    </div>
+    <div class="convenio-texto"></div>
+  </div>
+</div>
+
+<!-- FAIXA AZUL TITULO -->
+<div class="faixa-titulo">
+  <h1>JORNADA EMPREENDEDORA NA MARÉ</h1>
+  <p>Inscrição para Consultorias Especializadas de Ampliação</p>
+</div>
+<div style="background: var(--azul-principal);">
+  <div class="faixa-sub">
+    <span>Junho a Julho de 2025</span>
+    <span class="sep">|</span>
+    <span>Terças-feiras</span>
+    <span class="sep">|</span>
+    <span>Complexo da Maré - Rio de Janeiro</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- SOBRE A JORNADA -->
+  <div class="card-info">
+    <h3>O que é a Jornada Empreendedora?</h3>
+    <p>
+      A Jornada Empreendedora é uma iniciativa do <strong>Programa Prospera Rio</strong>, realizada em parceria entre o <strong>Instituto BR Arte</strong> e o <strong>SEBRAE-RJ</strong>. São <strong>6 encontros semanais</strong>, sempre às terças-feiras, com temas práticos pensados para fortalecer o seu negócio. Cada participante integra um grupo fixo e percorre todas as etapas juntos, ao longo de 6 semanas.
+    </p>
+    <div class="temas-grid">
+      <div class="tema-item"><div class="num">Semana 1</div><div class="nome">Formalização do Negócio e Abertura de MEI</div><div class="data">09 de junho</div></div>
+      <div class="tema-item"><div class="num">Semana 2</div><div class="nome">Vendas em Marketplace</div><div class="data">16 de junho</div></div>
+      <div class="tema-item"><div class="num">Semana 3</div><div class="nome">IA para Empreendedores</div><div class="data">23 de junho</div></div>
+      <div class="tema-item"><div class="num">Semana 4</div><div class="nome">Atendimento ao Cliente e Experiência de Compra</div><div class="data">30 de junho</div></div>
+      <div class="tema-item"><div class="num">Semana 5</div><div class="nome">Marketing de Conteúdo para Pequenos Negócios</div><div class="data">07 de julho</div></div>
+      <div class="tema-item"><div class="num">Semana 6</div><div class="nome">Precificação para Marketplace e Vendas Online</div><div class="data">14 de julho</div></div>
+    </div>
+  </div>
+
+  <!-- ENDERECO -->
+  <div class="card-endereco">
+    <div class="endereco-marcador">
+      <svg width="18" height="22" viewBox="0 0 18 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9 0C4.03 0 0 4.03 0 9C0 15.25 9 22 9 22C9 22 18 15.25 18 9C18 4.03 13.97 0 9 0ZM9 12C7.34 12 6 10.66 6 9C6 7.34 7.34 6 9 6C10.66 6 12 7.34 12 9C12 10.66 10.66 12 9 12Z" fill="#092040"/>
+      </svg>
+    </div>
+    <div>
+      <h3>Local das Consultorias</h3>
+      <p>Casa Prospera Maré<br>Rua Teixeira Ribeiro, 527 - acima do ponto de mototáxi</p>
+      <p class="obs">Complexo da Maré - Rio de Janeiro - RJ</p>
+    </div>
+  </div>
+
+  <!-- FORMULARIO -->
+  <div class="form-card" id="formCard">
+
+    <div class="form-section-title">Dados Pessoais</div>
+
+    <div class="field-group">
+      <label for="nome">Nome completo <span class="obrig">*</span></label>
+      <input type="text" id="nome" placeholder="Digite seu nome completo" required>
+    </div>
+
+    <div class="field-group">
+      <label for="cpf">CPF <span class="obrig">*</span></label>
+      <input type="text" id="cpf" placeholder="000.000.000-00" maxlength="14" required>
+      <div class="cpf-status" id="cpfStatus"></div>
+      <p class="input-hint">Apenas um CPF por inscrição. Utilizado para validar seu cadastro e evitar duplicidades.</p>
+    </div>
+
+    <div class="field-group">
+      <label for="telefone">WhatsApp / Telefone <span class="obrig">*</span></label>
+      <input type="tel" id="telefone" placeholder="(21) 99999-9999" maxlength="15" required>
+    </div>
+
+    <div class="field-group">
+      <label for="email">E-mail <span class="obrig">*</span></label>
+      <input type="email" id="email" placeholder="seuemail@exemplo.com" required>
+    </div>
+
+    <div class="form-section-title">Dados do Negócio</div>
+
+    <div class="field-group">
+      <label for="negocio">Nome do negócio ou atividade <span class="obrig">*</span></label>
+      <input type="text" id="negocio" placeholder="Ex: Cabeleireiro da Ana, Salgados da Cida...">
+    </div>
+
+    <div class="field-group">
+      <label for="segmento">Segmento / Ramo de atividade <span class="obrig">*</span></label>
+      <select id="segmento" required>
+        <option value="">Selecione o segmento...</option>
+        <option>Alimentação e Gastronomia</option>
+        <option>Beleza e Estética</option>
+        <option>Comércio e Varejo</option>
+        <option>Confecção e Moda</option>
+        <option>Construção e Reformas</option>
+        <option>Educação e Cursos</option>
+        <option>Saúde e Bem-estar</option>
+        <option>Tecnologia e Serviços Digitais</option>
+        <option>Transporte e Logística</option>
+        <option>Outros serviços</option>
+      </select>
+    </div>
+
+    <div class="form-section-title">Escolha do Horário</div>
+
+    <p style="font-size:13px; color:#555; margin-bottom:10px; line-height:1.65;">
+      Os horários disponíveis estão listados abaixo com a quantidade de vagas restantes. Escolha o horário que melhor se encaixa na sua rotina. <strong>Este será o seu horário fixo</strong> em todas as 6 semanas da Jornada, sempre às terças-feiras. Vagas limitadas a <strong>5 participantes por horário</strong>, confirmadas por ordem de inscrição.
+    </p>
+
+    <div class="alerta-vagas" id="alertaVagas" style="display:none;"></div>
+
+    <div class="horarios-grid" id="horariosGrid">
+      <div class="horario-option" id="op1"><input type="radio" name="horario" id="h1" value="09h00 - 10h00 (Grupo 1)"><label class="horario-label" for="h1"><span class="horario-label-left"><span class="horario-dot"></span>09h00 - 10h00</span><span class="vagas-badge vagas-ok" id="vg1">5 vagas</span></label></div>
+      <div class="horario-option" id="op2"><input type="radio" name="horario" id="h2" value="10h00 - 11h00 (Grupo 2)"><label class="horario-label" for="h2"><span class="horario-label-left"><span class="horario-dot"></span>10h00 - 11h00</span><span class="vagas-badge vagas-ok" id="vg2">5 vagas</span></label></div>
+      <div class="horario-option" id="op3"><input type="radio" name="horario" id="h3" value="11h00 - 12h00 (Grupo 3)"><label class="horario-label" for="h3"><span class="horario-label-left"><span class="horario-dot"></span>11h00 - 12h00</span><span class="vagas-badge vagas-ok" id="vg3">5 vagas</span></label></div>
+      <div class="horario-option" id="op4"><input type="radio" name="horario" id="h4" value="12h00 - 13h00 (Grupo 4)"><label class="horario-label" for="h4"><span class="horario-label-left"><span class="horario-dot"></span>12h00 - 13h00</span><span class="vagas-badge vagas-ok" id="vg4">5 vagas</span></label></div>
+      <div class="horario-option" id="op5"><input type="radio" name="horario" id="h5" value="13h00 - 14h00 (Grupo 5)"><label class="horario-label" for="h5"><span class="horario-label-left"><span class="horario-dot"></span>13h00 - 14h00</span><span class="vagas-badge vagas-ok" id="vg5">5 vagas</span></label></div>
+      <div class="horario-option" id="op6"><input type="radio" name="horario" id="h6" value="14h00 - 15h00 (Grupo 6)"><label class="horario-label" for="h6"><span class="horario-label-left"><span class="horario-dot"></span>14h00 - 15h00</span><span class="vagas-badge vagas-ok" id="vg6">5 vagas</span></label></div>
+      <div class="horario-option" id="op7"><input type="radio" name="horario" id="h7" value="15h00 - 16h00 (Grupo 7)"><label class="horario-label" for="h7"><span class="horario-label-left"><span class="horario-dot"></span>15h00 - 16h00</span><span class="vagas-badge vagas-ok" id="vg7">5 vagas</span></label></div>
+      <div class="horario-option" id="op8"><input type="radio" name="horario" id="h8" value="16h00 - 17h00 (Grupo 8)"><label class="horario-label" for="h8"><span class="horario-label-left"><span class="horario-dot"></span>16h00 - 17h00</span><span class="vagas-badge vagas-ok" id="vg8">5 vagas</span></label></div>
+      <div class="horario-option" id="op9"><input type="radio" name="horario" id="h9" value="17h00 - 18h00 (Grupo 9)"><label class="horario-label" for="h9"><span class="horario-label-left"><span class="horario-dot"></span>17h00 - 18h00</span><span class="vagas-badge vagas-ok" id="vg9">5 vagas</span></label></div>
+      <div class="horario-option" id="op10"><input type="radio" name="horario" id="h10" value="18h00 - 19h00 (Grupo 10)"><label class="horario-label" for="h10"><span class="horario-label-left"><span class="horario-dot"></span>18h00 - 19h00</span><span class="vagas-badge vagas-ok" id="vg10">5 vagas</span></label></div>
+    </div>
+
+    <div id="avisoHorario" style="display:none; margin-top:14px; background:#E8F8FC; border-left:4px solid #00B7D7; padding:14px 18px;">
+      <p style="font-family:'Montserrat',sans-serif; font-weight:700; color:#092040; font-size:13px; margin-bottom:6px;" id="avisoHorarioTitulo"></p>
+      <p style="font-size:13px; color:#1A1A1A; line-height:1.65;">
+        Ao confirmar sua inscrição, esta vaga ficará <strong>bloqueada exclusivamente para você</strong> neste horário durante toda a Jornada. Caso não possa comparecer em alguma semana, <strong>avise com antecedência pelo WhatsApp</strong> para que possamos organizar a reposição.
+      </p>
+      <p style="margin-top:10px; font-size:13px;">
+        <strong>WhatsApp Prospera Rio Maré:</strong>
+        <a href="https://wa.me/5521990676576" target="_blank"
+           style="color:#092040; font-weight:700; font-family:'Montserrat',sans-serif;">
+          (21) 99067-6576
+        </a>
+      </p>
+    </div>
+
+    <div class="form-section-title" style="margin-top:28px;">Compromisso de Participação</div>
+
+    <div class="aviso-compromisso">
+      A Jornada Empreendedora é composta por <strong>6 encontros obrigatórios</strong>. Ao se inscrever, você se compromete a participar de todas as semanas no horário escolhido. Em caso de falta justificada, há uma semana de reposição em <strong>21 de julho de 2025</strong>.
+    </div>
+
+    <div class="checkbox-field">
+      <input type="checkbox" id="compromisso" required>
+      <label for="compromisso">Confirmo que li as informações acima e me comprometo a participar dos 6 encontros semanais da Jornada Empreendedora na Maré no horário que selecionei.</label>
+    </div>
+
+    <button class="btn-submit" id="btnSubmit" onclick="enviarFormulario()">
+      Confirmar minha Inscrição
+    </button>
+
+  </div>
+
+  <!-- SUCESSO -->
+  <div class="sucesso-card" id="sucessoCard">
+    <div class="sucesso-icone">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+        <path d="M20 6L9 17L4 12" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <h2>Inscrição Confirmada!</h2>
+    <p>Sua inscrição na Jornada Empreendedora na Maré foi registrada com sucesso.</p>
+    <p id="sucessoNome" style="font-weight:600; color:var(--azul-principal); margin-top:8px;"></p>
+    <div class="sucesso-horario" id="sucessoHorario"></div>
+    <p style="margin-top:20px; font-size:13px; color:#888;">
+      Este será o seu horário fixo em todas as 6 terças-feiras da Jornada.<br>
+      Em breve você receberá informações pelo WhatsApp cadastrado.
+    </p>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="rodape">
+  <p>Programa Prospera Rio - Instituto BR Arte em parceria com SEBRAE-RJ</p>
+  <p>Casa Prospera Maré - Rua Teixeira Ribeiro, 527 - Complexo da Maré - Rio de Janeiro - RJ</p>
+</div>
+
+<script>
+  const SCRIPT_URL     = "https://script.google.com/macros/s/AKfycbyGziQoPmeZOBfKTJ1MA8IAqEyLClhkdE_p61Ca4mBJJzu0tYIEjzd0crgM1bC56q2e/exec";
+  const VAGAS_LIMITE   = 5;
+  let cpfsCadastrados  = [];
+
+  document.getElementById('cpf').addEventListener('input', function(e) {
+    let v = e.target.value.replace(/\D/g, '');
+    if (v.length > 3)  v = v.slice(0,3) + '.' + v.slice(3);
+    if (v.length > 7)  v = v.slice(0,7) + '.' + v.slice(7);
+    if (v.length > 11) v = v.slice(0,11) + '-' + v.slice(11);
+    e.target.value = v.slice(0,14);
+    validarCPF();
+  });
+
+  document.getElementById('telefone').addEventListener('input', function(e) {
+    let v = e.target.value.replace(/\D/g, '');
+    if (v.length > 2)  v = '(' + v.slice(0,2) + ') ' + v.slice(2);
+    if (v.length > 10) v = v.slice(0,10) + '-' + v.slice(10);
+    e.target.value = v.slice(0,15);
+  });
+
+  function validarCPF() {
+    const campo  = document.getElementById('cpf');
+    const status = document.getElementById('cpfStatus');
+    const raw    = campo.value.replace(/\D/g, '');
+    if (raw.length < 11) { status.textContent = ''; return false; }
+    if (!cpfValido(raw)) {
+      status.textContent = 'CPF inválido. Verifique os números digitados.';
+      status.className = 'cpf-status cpf-erro'; return false;
+    }
+    if (cpfsCadastrados.includes(raw)) {
+      status.textContent = 'Este CPF já possui inscrição registrada.';
+      status.className = 'cpf-status cpf-duplo'; return false;
+    }
+    status.textContent = 'CPF válido.';
+    status.className = 'cpf-status cpf-ok'; return true;
+  }
+
+  function cpfValido(cpf) {
+    if (/^(\d)\1+$/.test(cpf)) return false;
+    let s = 0;
+    for (let i = 0; i < 9; i++) s += parseInt(cpf[i]) * (10 - i);
+    let r = (s * 10) % 11; if (r === 10 || r === 11) r = 0;
+    if (r !== parseInt(cpf[9])) return false;
+    s = 0;
+    for (let i = 0; i < 10; i++) s += parseInt(cpf[i]) * (11 - i);
+    r = (s * 10) % 11; if (r === 10 || r === 11) r = 0;
+    return r === parseInt(cpf[10]);
+  }
+
+  function atualizarVagas(contagens) {
+    for (let i = 1; i <= 10; i++) {
+      const livres = VAGAS_LIMITE - (contagens['Grupo ' + i] || 0);
+      const badge  = document.getElementById('vg' + i);
+      const opcao  = document.getElementById('op' + i);
+      const radio  = document.getElementById('h'  + i);
+      if (livres <= 0) {
+        badge.textContent = 'Esgotado';
+        badge.className   = 'vagas-badge vagas-cheio';
+        opcao.classList.add('lotado');
+        radio.disabled = true;
+      } else if (livres <= 2) {
+        badge.textContent = livres + ' vaga' + (livres === 1 ? '' : 's');
+        badge.className   = 'vagas-badge vagas-poucos';
+      } else {
+        badge.textContent = livres + ' vagas';
+        badge.className   = 'vagas-badge vagas-ok';
+      }
+    }
+  }
+
+  function carregarVagas() {
+    const alerta = document.getElementById('alertaVagas');
+    alerta.style.display = 'block';
+    alerta.textContent   = 'Verificando disponibilidade de vagas...';
+    fetch(SCRIPT_URL + '?acao=vagas')
+      .then(r => r.json())
+      .then(resp => {
+        alerta.style.display = 'none';
+        if (resp.contagens) {
+          atualizarVagas(resp.contagens);
+          cpfsCadastrados = resp.cpfs || [];
+        }
+      })
+      .catch(() => {
+        alerta.textContent = 'Não foi possível verificar a disponibilidade em tempo real. As vagas serão confirmadas no envio.';
+      });
+  }
+
+  function enviarFormulario() {
+    const nome        = document.getElementById('nome').value.trim();
+    const cpf         = document.getElementById('cpf').value.trim();
+    const telefone    = document.getElementById('telefone').value.trim();
+    const email       = document.getElementById('email').value.trim();
+    const negocio     = document.getElementById('negocio').value.trim();
+    const segmento    = document.getElementById('segmento').value;
+    const horario     = document.querySelector('input[name="horario"]:checked');
+    const compromisso = document.getElementById('compromisso').checked;
+
+    if (!nome || !cpf || !telefone || !email || !negocio || !segmento) {
+      alert('Por favor, preencha todos os campos obrigatórios.'); return;
+    }
+    if (!validarCPF()) {
+      alert('Verifique o CPF informado antes de continuar.'); return;
+    }
+    if (!horario) {
+      alert('Selecione o horário de sua preferência.'); return;
+    }
+    if (!compromisso) {
+      alert('Confirme o compromisso de participação para prosseguir.'); return;
+    }
+
+    document.getElementById('loadingOverlay').classList.add('ativo');
+    document.getElementById('btnSubmit').disabled = true;
+
+    const dados = { acao: 'inscricao', nome, cpf, telefone, email, negocio, segmento, horario: horario.value };
+
+    fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(dados) })
+      .then(r => r.json())
+      .then(resp => {
+        document.getElementById('loadingOverlay').classList.remove('ativo');
+        if (resp.status === 'ok') {
+          document.getElementById('formCard').style.display = 'none';
+          document.getElementById('sucessoCard').style.display = 'block';
+          document.getElementById('sucessoNome').textContent  = nome;
+          document.getElementById('sucessoHorario').textContent = horario.value;
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else if (resp.status === 'cpf_duplicado') {
+          document.getElementById('btnSubmit').disabled = false;
+          const s = document.getElementById('cpfStatus');
+          s.textContent = 'Este CPF já possui inscrição registrada.';
+          s.className   = 'cpf-status cpf-duplo';
+          cpfsCadastrados.push(cpf.replace(/\D/g, ''));
+        } else if (resp.status === 'horario_lotado') {
+          document.getElementById('btnSubmit').disabled = false;
+          carregarVagas();
+          alert('Este horário foi preenchido enquanto você finalizava o formulário. Por favor, escolha outro horário disponível.');
+        } else {
+          document.getElementById('btnSubmit').disabled = false;
+          alert('Ocorreu um erro ao registrar. Tente novamente em instantes.');
+        }
+      })
+      .catch(() => {
+        document.getElementById('loadingOverlay').classList.remove('ativo');
+        document.getElementById('btnSubmit').disabled = false;
+        alert('Erro de conexão. Verifique sua internet e tente novamente.');
+      });
+  }
+
+  window.addEventListener('load', carregarVagas);
+
+  // Aviso ao selecionar horário
+  document.querySelectorAll('input[name="horario"]').forEach(function(radio) {
+    radio.addEventListener('change', function() {
+      if (this.checked) {
+        const horarioTexto = this.value.split(' (')[0];
+        const aviso   = document.getElementById('avisoHorario');
+        const titulo  = document.getElementById('avisoHorarioTitulo');
+        titulo.textContent = 'Você selecionou o horário ' + horarioTexto + '.';
+        aviso.style.display = 'block';
+        aviso.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
